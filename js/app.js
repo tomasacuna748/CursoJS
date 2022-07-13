@@ -121,8 +121,7 @@ function formasDePago() {
   } else if (formaPago === 2) {
       alert("Recargos por cuotas // 2 y 3: 10%  // 4 a 6: 20% // 7 a 12: 35%");
       cuotas = parseInt(prompt("ingrese cantidad de cuotas(de 2 a 12)"));
-      credito(cuotas);
-      total.toFixed(2);
+      total = credito(cuotas).toFixed(2);
       alert(`Total: $ ${total} //  ${cuotas} Cuotas de $ ${(total/cuotas).toFixed(2)}`);
   } else {
       alert("error de digito");
@@ -144,7 +143,7 @@ function credito(cuotas) {
     default:
       alert("error cantidad de cuotas");
   }
-  
+  return total;
 }
 
 function reiniciar(){
