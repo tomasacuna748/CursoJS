@@ -1,6 +1,7 @@
 let arrayProductos=[];
 let arrayCarrito =[];
 let peluche;
+let total=0;
 
 
 class Producto{
@@ -106,11 +107,50 @@ function finalizar() {
     for (let index = 0; index < arrayCarrito.length; index++) {
       console.log("-"+arrayCarrito[index].nombre)
     } 
-    alert(`El total de su compra es: $${(calculaCompra().toFixed(2))}`);  
+    total= calculaCompra().toFixed(2)
+    alert(`El total de su carrito es: $${total}`);
+    formasDePago();
 }
+
+function formasDePago() {
+  let formaPago = parseInt(prompt("como desea pagar? 1-Contado 2-Credito"));
+  let cuotas;
+
+  if (formaPago === 1) {
+    alert(`Total a pagar: $ ${total}`);
+  } else if (formaPago === 2) {
+      alert("Recargos por cuotas // 2 y 3: 10%  // 4 a 6: 20% // 7 a 12: 35%");
+      cuotas = parseInt(prompt("ingrese cantidad de cuotas(de 2 a 12)"));
+      credito(cuotas);
+      total.toFixed(2);
+      alert(`Total: $ ${total} //  ${cuotas} Cuotas de $ ${(total/cuotas).toFixed(2)}`);
+  } else {
+      alert("error de digito");
+  }
+  
+}
+function credito(cuotas) {
+
+  switch (cuotas) {
+    case 2: case 3:
+      total = total * 1.1;
+      break;
+    case 4: case 5: case 6: 
+      total = total * 1.2;
+      break;
+      case 7: case 8: case 9: case 10: case 11: case 12: 
+      total = total * 1.35;
+      break;
+    default:
+      alert("error cantidad de cuotas");
+  }
+  
+}
+
 function reiniciar(){
     
     arrayCarrito =[];
     console.log("------------------------------");
+    total=0;
    
 }
