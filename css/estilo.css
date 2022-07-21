@@ -47,6 +47,13 @@ color: orange; }
     margin-bottom: 5rem;
     text-decoration: underline;
 }
+.cvacio{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #000000;
+    margin-top: 10rem;
+}
 
 .tituloObjeto {
     display: flex;
