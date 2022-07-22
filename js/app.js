@@ -40,8 +40,9 @@ for (const producto of arrayProductos){
     <div>
         <img src= ${producto.img}  alt="Peluche ${producto.nombre}" width="250" height="250">
     </div>
-    <div class="card-der">
-        <p class="card-precio">${producto.precio}</p>
+    <div class="card-der card-precio">
+        
+        <p>$  <span>${producto.precio}</span></p>
         <button id="${producto.id}" type="button" class="btn btn-primary btn-lg boton-comprar">Comprar</button>
     </div>`;
 
@@ -66,7 +67,7 @@ function agregarProducto(e) {
   const button = e.target
 	const item = button.closest('.card');
 	const itemNombre = item.querySelector('h3').textContent;
-	const itemPrecio = item.querySelector('p').textContent;
+	const itemPrecio = item.querySelector('span').textContent;
 	const itemID = item.querySelector('button').getAttribute('id');
 	const itemImg = item.querySelector('img').src;
   const itemCantidad = 1;
@@ -76,31 +77,33 @@ function agregarProducto(e) {
   agregarItem(nuevoItem);
   //arrayCarrito.push(nuevoItem)
   console.log(arrayCarrito);
-  
 }
+    
+  
 function agregarItem(nuevoItem){
 	
 	for(let i =0; i < arrayCarrito.length ; i++){
 		if(arrayCarrito[i].nombre.trim() === nuevoItem.nombre.trim()){
       arrayCarrito[i].cantidad ++;
-      //carritoTotal()
       return null;
 		}
 	}
 
 	arrayCarrito.push(nuevoItem)
-
 } 
-console.log("llego a la linea 94");//no
+
+console.log("llego antes del if");
+
 if (arrayCarrito.length === 0){
   let cardCarrito= document.createElement("div");
   cardCarrito.innerHTML=`
   <h2 class="cvacio">Carrito vacio</h2>
   `;
-  document.getElementById("bcarrito").append(cardCarrito);
-
+  document.getElementById("lista-carrito").append(cardCarrito);
+  console.log("entro al if");
 }else {
   for (const cart of arrayCarrito){
+    console.log("entro al for del else");
     let cardCarrito =document.createElement("div");
     cardCarrito.innerHTML = `
     <div>
@@ -122,3 +125,19 @@ if (arrayCarrito.length === 0){
     cardNueva.classList.add("card","tituloObjeto");
   }
 }//ultimos divs para botones de reiniciar carrito y finalizar compra
+
+function vaciarCarrtito(){
+  arrayCarrito = [];
+  console.log("------------------------------");
+  total = 0;
+}
+function finalizarCompra(){
+
+  for (let index = 0; index < arrayCarrito.length; index++) {
+    
+    let p = arrayCarrito[index].precio * arrayCarrito[index].cantidad;
+    total+= p;
+  }
+  return total;
+
+}
