@@ -2,6 +2,11 @@ const arrayProductos = [];
 let arrayCarrito = [];
 let peluche;
 let total = 0;
+const storage = JSON.parse(localStorage.getItem('carrito'))
+if(storage){
+  arrayCarrito = storage;
+}
+
 
 class Producto {
   constructor(id,img,nombre, precio, stock) {
@@ -38,7 +43,7 @@ for (const producto of arrayProductos){
         <h3 class="card-izq">${producto.nombre}</h3>
     </div>
     <div>
-        <img src= ${producto.img}  alt="Peluche ${producto.nombre}" width="250" height="250">
+        <img src=${producto.img}  alt="Peluche ${producto.nombre}" width="250" height="250">
     </div>
     <div class="card-der card-precio">
         
@@ -54,7 +59,7 @@ for (const producto of arrayProductos){
 
 
 
-const vaciarCarritoBtn = document.querySelector("#vaciar-carrito"); 
+
 
 const clickbutton = document.querySelectorAll('.boton-comprar')
 
@@ -66,18 +71,56 @@ clickbutton.forEach(btn => {
 function agregarProducto(e) {
   const button = e.target
 	const item = button.closest('.card');
-	const itemNombre = item.querySelector('h3').textContent;
+
+	/*
+  const itemNombre = item.querySelector('h3').textContent;
 	const itemPrecio = item.querySelector('span').textContent;
 	const itemID = item.querySelector('button').getAttribute('id');
 	const itemImg = item.querySelector('img').src;
   const itemCantidad = 1;
   const nuevoItem = new Carrito(itemNombre,itemPrecio,itemImg,itemID,itemCantidad)
+*/
+  let productoClickeado = arrayProductos.find((item) => item.id == e.target.id);
+  let idP= productoClickeado.id;
+  const existe = arrayCarrito.some(prod => prod.id === productoClickeado.id);
 
-  //console.log(nuevoItem);
-  agregarItem(nuevoItem);
-  //arrayCarrito.push(nuevoItem)
-  console.log(arrayCarrito);
+  if (existe) {
+    const prod = arrayCarrito.map(prod =>{
+        if(prod.id === productoClickeado.id){
+          prod.cantidad++;
+        }
+
+    })
+  } else {
+
+  const itemNombre = arrayProductos[idP].nombre;
+	const itemPrecio = arrayProductos[idP].precio;
+	const itemID = arrayProductos[idP].id;
+	const itemImg = arrayProductos[idP].img;
+  const itemCantidad = 1;
+  const nuevoItem = new Carrito(itemNombre,itemPrecio,itemImg,itemID,itemCantidad)
+  arrayCarrito.push(nuevoItem)
+  
 }
+  //agregarItem(nuevoItem);
+  console.log(arrayCarrito);
+  localStorage.setItem('carrito',JSON.stringify(arrayCarrito));
+}
+
+
+/*
+function chequeoLocalRepetido(nuevoItem){
+  const carritoL = JSON.parse(localStorage.getItem('carrito'));
+  for(let i =0; i < carritoL.length ; i++){
+		if(carritoL[i].nombre.trim() === nuevoItem.nombre.trim()){
+      carritoL[i].cantidad ++;
+      const carritoSTR = JSON.stringify(carritoL);
+
+      return null;
+		}
+	}
+
+}*/
     
   
 function agregarItem(nuevoItem){
@@ -88,56 +131,29 @@ function agregarItem(nuevoItem){
       return null;
 		}
 	}
+  /*
+  if (carritoL) {
+    arrayCarrito = carritoL;
+  }*/
+	arrayCarrito.push(nuevoItem);
 
-	arrayCarrito.push(nuevoItem)
-} 
-
-console.log("llego antes del if");
-
-if (arrayCarrito.length === 0){
-  let cardCarrito= document.createElement("div");
-  cardCarrito.innerHTML=`
-  <h2 class="cvacio">Carrito vacio</h2>
-  `;
-  document.getElementById("lista-carrito").append(cardCarrito);
-  console.log("entro al if");
-}else {
-  for (const cart of arrayCarrito){
-    console.log("entro al for del else");
-    let cardCarrito =document.createElement("div");
-    cardCarrito.innerHTML = `
-    <div>
-      <div class="tituloObjeto">
-      <img src= ${cart.img}  alt="Peluche ${cart.nombre}" width="100" height="100">
-      </div>
-      <div>
-          <h3 >${cart.nombre}</h3>
-      </div>
-      <div>
-          <p class="card-precio">$ ${cart.precio}</p>
-      </div>
-    </div>
-    <div>
-
-    </div>
-    `;
-    document.getElementById("lista-carrito").append(cardCarrito);
-    cardNueva.classList.add("card","tituloObjeto");
-  }
-}//ultimos divs para botones de reiniciar carrito y finalizar compra
-
-function vaciarCarrtito(){
-  arrayCarrito = [];
-  console.log("------------------------------");
-  total = 0;
+  //addLocalStorage();
+  
+  const asdSTR = JSON.stringify(arrayCarrito);
+  localStorage.setItem("carrito",asdSTR);
+  console.log(arrayCarrito);
+  console.log(asdSTR);
 }
-function finalizarCompra(){
 
-  for (let index = 0; index < arrayCarrito.length; index++) {
-    
-    let p = arrayCarrito[index].precio * arrayCarrito[index].cantidad;
-    total+= p;
+function addLocalStorage(){
+  if(arrayCarrito.length){
+    const carritoL= localStorage.getItem('carrito');
+    carritoL
+  }else{
+    localStorage.setItem('carrito', JSON.stringify(arrayCarrito))
   }
-  return total;
-
 }
+/*
+window.onload = function(){
+  const carritoL = JSON.parse(localStorage.getItem('carrito'));
+}*/
