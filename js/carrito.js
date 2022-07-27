@@ -62,11 +62,13 @@ function imprimeCarrito() {
     `;
     document.getElementById("bcarrito").append(cardBotones);
     cardBotones.classList.add("d-flex","justify-content-around")
+
     const botonVaciar = document.getElementById('vcarrito'); 
     botonVaciar.addEventListener('click',()=>{
         arrayCarrito.length = 0;
         localStorage.removeItem('carrito');
         total=0;
+        document.location.reload(true);
         actualizaVentana();
 })
     
