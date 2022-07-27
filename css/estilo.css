@@ -99,3 +99,22 @@ color: orange; }
     line-height: 1.5;
     border-radius: 0.3rem;
 }
+
+.productos-carrito{
+    
+    background-image: linear-gradient(#2d8ba5, #92D6E8 75%);
+    border: #000000 solid 1rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+.productos-carrito h3{
+    
+    font-size: 3rem;
+}
+
+.productos-carrito-cantidad{
+    color: #000000;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
