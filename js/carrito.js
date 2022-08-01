@@ -2,20 +2,14 @@ const arrayCarrito = JSON.parse(localStorage.getItem('carrito'));
 console.log(arrayCarrito);
 let total =0;
 
-
+(arrayCarrito != null) ?imprimeCarrito() : actualizaVentana();
+/*
 if (arrayCarrito != null){
-    imprimeCarrito();
-    
+    imprimeCarrito();  
 }else {
-    actualizaVentana();
-    /*
-    let cardCarrito= document.createElement("div");
-    cardCarrito.innerHTML=`
-    <h2 class="cvacio">Carrito vacio</h2>
-    `;
-    document.getElementById("lista-carrito").append(cardCarrito);*/
-}
-//ultimos divs para botones de reiniciar carrito y finalizar compra
+    actualizaVentana();  
+}*/
+
 function imprimeCarrito() {
     for (const cart of arrayCarrito){
         let pcant =0;
@@ -46,6 +40,7 @@ function imprimeCarrito() {
         console.log(cart.nombre,cart.precio,cart.cantidad);
         total+= (cart.precio * cart.cantidad);
         console.log(total);
+        
     }
     
     let cardBotones =document.createElement("div");
@@ -70,16 +65,16 @@ function imprimeCarrito() {
         total=0;
         document.location.reload(true);
         actualizaVentana();
-})
+    })
     
+    calculaTotal();
     
+  
 }
-
-const precioTotal = document.getElementById('precioTotal');
-
-precioTotal.innerText = arrayCarrito.reduce((acc,prod)=> acc + prod.precio* prod.cantidad,0);
-
-
+function calculaTotal (){
+    const precioTotal = document.getElementById('precioTotal');
+    precioTotal.innerText = arrayCarrito.reduce((acc,prod)=> acc + prod.precio* prod.cantidad,0);
+}
 
 function actualizaVentana() {
     let cardCarrito= document.createElement("div");
@@ -90,19 +85,19 @@ function actualizaVentana() {
 }
 
 
-
-  function vaciarCarrito(){
+//no se usan
+function vaciarCarrito(){
     arrayCarrito = [];
     console.log("------------------------------");
     total = 0;
-  }
-  function finalizarCompra(){
-  
+}
+function finalizarCompra(){
+
     for (let index = 0; index < arrayCarrito.length; index++) {
-      
-      let p = arrayCarrito[index].precio * arrayCarrito[index].cantidad;
-      total+= p;
+        
+        let p = arrayCarrito[index].precio * arrayCarrito[index].cantidad;
+        total+= p;
     }
     return total;
-  
-  }
+
+}

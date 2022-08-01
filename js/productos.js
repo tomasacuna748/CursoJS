@@ -1,11 +1,14 @@
 const arrayProductos = [];
-let arrayCarrito = [];
 let peluche;
 let total = 0;
+const arrayCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+/*
+let arrayCarrito = [];
 const storage = JSON.parse(localStorage.getItem('carrito'))
 if(storage){
   arrayCarrito = storage;
-}
+}*/
 
 
 class Producto {
@@ -26,7 +29,7 @@ class Carrito {
     this.cantidad = cantidad;
   }
 }
-let j = 0;
+
 const chancho = new Producto(0,"img/Productos/chancho.jpeg","Chanchito", 1000, 9);
 const elefante = new Producto(1,"img/Productos/elefante.jpeg","Elefante", 1100, 12);
 const lobo = new Producto(2,"img/Productos/lobo.jpeg","Lobo", 1200, 5);
@@ -58,9 +61,6 @@ for (const producto of arrayProductos){
 // eventos armando carrito
 
 
-
-
-
 const clickbutton = document.querySelectorAll('.boton-comprar')
 
 clickbutton.forEach(btn => {
@@ -82,25 +82,24 @@ function agregarProducto(e) {
 */
   let productoClickeado = arrayProductos.find((item) => item.id == e.target.id);
   let idP= productoClickeado.id;
-  const existe = arrayCarrito.some(prod => prod.id === productoClickeado.id);
 
+  const existe = arrayCarrito.some(prod => prod.id === productoClickeado.id);
   if (existe) {
     const prod = arrayCarrito.map(prod =>{
         if(prod.id === productoClickeado.id){
           prod.cantidad++;
         }
+        //(prod.id === productoClickeado.id)? prod.cantidad++;
 
     })
   } else {
-
-  const itemNombre = arrayProductos[idP].nombre;
-	const itemPrecio = arrayProductos[idP].precio;
-	const itemID = arrayProductos[idP].id;
-	const itemImg = arrayProductos[idP].img;
-  const itemCantidad = 1;
-  const nuevoItem = new Carrito(itemNombre,itemPrecio,itemImg,itemID,itemCantidad)
-  arrayCarrito.push(nuevoItem)
-  
+    const itemNombre = arrayProductos[idP].nombre;
+    const itemPrecio = arrayProductos[idP].precio;
+    const itemID = arrayProductos[idP].id;
+    const itemImg = arrayProductos[idP].img;
+    const itemCantidad = 1;
+    const nuevoItem = new Carrito(itemNombre,itemPrecio,itemImg,itemID,itemCantidad);
+    arrayCarrito.push(nuevoItem); 
 }
   //agregarItem(nuevoItem);
   console.log(arrayCarrito);
@@ -108,7 +107,7 @@ function agregarProducto(e) {
 }
 
 
-/*
+/* NO SE USA
 function chequeoLocalRepetido(nuevoItem){
   const carritoL = JSON.parse(localStorage.getItem('carrito'));
   for(let i =0; i < carritoL.length ; i++){
@@ -122,7 +121,7 @@ function chequeoLocalRepetido(nuevoItem){
 
 }*/
     
-  
+//NO SE USA  
 function agregarItem(nuevoItem){
 	
 	for(let i =0; i < arrayCarrito.length ; i++){
@@ -144,7 +143,7 @@ function agregarItem(nuevoItem){
   console.log(arrayCarrito);
   console.log(asdSTR);
 }
-
+/*NO SE USA
 function addLocalStorage(){
   if(arrayCarrito.length){
     const carritoL= localStorage.getItem('carrito');
@@ -152,7 +151,7 @@ function addLocalStorage(){
   }else{
     localStorage.setItem('carrito', JSON.stringify(arrayCarrito))
   }
-}
+}*/
 /*
 window.onload = function(){
   const carritoL = JSON.parse(localStorage.getItem('carrito'));
