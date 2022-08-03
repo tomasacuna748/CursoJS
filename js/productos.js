@@ -104,6 +104,11 @@ function agregarProducto(e) {
   //agregarItem(nuevoItem);
   console.log(arrayCarrito);
   localStorage.setItem('carrito',JSON.stringify(arrayCarrito));
+  //swal(productoClickeado.nombre+" agregado al carrito","", "success","okey");
+  swal(productoClickeado.nombre+" agregado al carrito","", "success", {
+    button: "=)",
+    timer: 3000,
+  });
 }
 
 

@@ -60,11 +60,40 @@ function imprimeCarrito() {
 
     const botonVaciar = document.getElementById('vcarrito'); 
     botonVaciar.addEventListener('click',()=>{
-        arrayCarrito.length = 0;
-        localStorage.removeItem('carrito');
-        total=0;
-        document.location.reload(true);
-        actualizaVentana();
+        swal("¿Seguro que deseas vaciar el carrito?","","warning",{
+            buttons: {
+                cancelar:{
+                    className: "btn btn-outline-danger btn-lg",
+                    text: "Cancelar",
+                
+                    value: false,
+                },
+                aceptar: {
+                    className: "btn btn-outline-success btn-lg",
+                    text: "Vaciar Carrito",
+                    value: true,
+                },
+        },}
+            
+        )
+          .then((willDelete) => {
+            if (willDelete) {
+                swal("Carrito Vaciado", {
+                    icon: "success",
+                });
+                arrayCarrito.length = 0;
+                localStorage.removeItem('carrito');
+                
+                total=0;
+                document.location.reload(true);
+                actualizaVentana();
+
+            } else {
+              swal("Carrito no fue borrado");
+            }
+          });
+
+        
     })
     
     calculaTotal();
@@ -78,6 +107,8 @@ function calculaTotal (){
 
 function actualizaVentana() {
     let cardCarrito= document.createElement("div");
+    cardCarrito.innerHTML="";
+    
     cardCarrito.innerHTML=`
     <h2 class="cvacio">Carrito vacio</h2>
     `;
