@@ -18,7 +18,7 @@ function imprimeCarrito() {
         cardCarrito.innerHTML = `
         <div>
             <div>
-            <img src= ../${cart.img}  alt="Peluche ${cart.nombre}" width="150" height="150">
+            <img src= "../img/Productos/${cart.img}.jpeg"  alt="Peluche ${cart.nombre}" width="150" height="150">
             </div>
             <div>
                 <h3 >${cart.nombre}</h3>

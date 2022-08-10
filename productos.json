@@ -1,0 +1,50 @@
+[
+    {
+        "id": "0",
+        "nombre": "Chanchito",
+        "imgTitle": "imgChancho",
+        "precio": "2600",
+        "stock": "5"
+    
+    },
+    {
+        "id": "1",
+        "nombre": "Elefante",
+        "imgTitle": "imgElefante",
+        "precio": "2500",
+        "stock": "7"
+    
+    },
+    {
+        "id": "2",
+        "nombre": "Lobo",
+        "imgTitle": "imgLobo",
+        "precio": "2800",
+        "stock": "6"
+    
+    },
+    {
+        "id": "3",
+        "nombre": "Panda",
+        "imgTitle": "imgPanda",
+        "precio": "2800",
+        "stock": "3"
+    
+    },
+    {
+        "id": "4",
+        "nombre": "Pulpo",
+        "imgTitle": "imgPulpo",
+        "precio": "1500",
+        "stock": "9"
+    
+    },
+    {
+        "id": "5",
+        "nombre": "Tigre",
+        "imgTitle": "imgTigre",
+        "precio": "3500",
+        "stock": "7"
+    
+    }  
+]
