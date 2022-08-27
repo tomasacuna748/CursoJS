@@ -27,6 +27,7 @@ fetch("productos.json")
       cardNueva.classList.add("card","tituloObjeto");
   
     }
+    const contCarrito = document.querySelector("#contadorCarrito");
     const clickbutton = document.querySelectorAll('.boton-comprar');
     clickbutton.forEach(btn => {
       btn.addEventListener('click', agregarProducto)
@@ -42,7 +43,10 @@ fetch("productos.json")
       }
     }
     const arrayCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  
+    let contC=0;
+    (arrayCarrito.length !== 0) ?(arrayCarrito.forEach(element => contC+=element.cantidad)):contC=0;
+    contCarrito.innerHTML=contC;
+
   function agregarProducto(e) {
     const button = e.target
     const item = button.closest('.card');
@@ -55,7 +59,6 @@ fetch("productos.json")
           if(prod.id === productoClickeado.id){
             prod.cantidad++;
           }
-          //(prod.id === productoClickeado.id)? prod.cantidad++;
   
       })
     } else {
@@ -76,6 +79,8 @@ fetch("productos.json")
       button: "=)",
       timer: 3000,
     });
+  
+    contCarrito.innerHTML=(contC+=1);
   }
   
 
